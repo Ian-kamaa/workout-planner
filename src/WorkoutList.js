@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WorkoutList = ({ workouts }) => {
+const WorkoutList = ({ workouts, onDelete }) => {
   return (
     <div className="workout-list">
       <h2>Workout List</h2>
@@ -10,6 +10,7 @@ const WorkoutList = ({ workouts }) => {
           <p>Description: {workout.description}</p>
           <p>Duration: {workout.duration}</p>
           <p>Sets: {workout.sets}</p>
+          <button onClick={()=> onDelete(index)}>Delete</button>
         </div>
       ))}
     </div>

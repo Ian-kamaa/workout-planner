@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import WorkoutList from './WorkoutList';
 
+
 function App() {
   const [workout, setWorkout] = useState('');
   const [workouts, setWorkouts] = useState([]);
+  const [deleteMessage, setDeleteMessage] = useState(''); 
 
   const handleInputChange = (event) => {
     setWorkout(event.target.value);
@@ -20,6 +22,17 @@ function App() {
     setWorkouts([...workouts, newWorkout]);
     setWorkout('');
   };
+  const handleDeleteWorkout = (index)=>{
+    const updatedWorkouts = [...workouts];
+    const deletedWorkout = updatedWorkouts.splice(index, 1);
+    setWorkouts(updatedWorkouts);
+    setDeleteMessage(alert());
+    
+    setTimeout(()=>{
+      setDeleteMessage('');
+    },3000);
+  };
+  
 
   return (
     <div className="App">
@@ -31,7 +44,8 @@ function App() {
         placeholder="Enter your workout"
       />
       <button onClick={handleAddWorkout}>Add Workout</button>
-      <WorkoutList workouts={workouts}/>
+      {deleteMessage &&  <p>{deleteMessage}</p>}
+      <WorkoutList workouts={workouts} onDelete={handleDeleteWorkout}/>
     </div>
   );
 }
