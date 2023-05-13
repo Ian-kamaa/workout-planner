@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import WorkoutList from './WorkoutList';
 
 function App() {
   const [workout, setWorkout] = useState('');
+  const [workouts, setWorkouts] = useState([]);
 
   const handleInputChange = (event) => {
     setWorkout(event.target.value);
@@ -9,7 +11,13 @@ function App() {
 
   const handleAddWorkout = () => {
     // Perform any validation checks here before adding the workout
-    console.log(`Adding workout: ${workout}`);
+    const newWorkout = {
+      name: workout,
+      description:'sample description',
+      duration:'30 minutes',
+      sets:3,
+    };
+    setWorkouts([...workouts, newWorkout]);
     setWorkout('');
   };
 
@@ -23,6 +31,7 @@ function App() {
         placeholder="Enter your workout"
       />
       <button onClick={handleAddWorkout}>Add Workout</button>
+      <WorkoutList workouts={workouts}/>
     </div>
   );
 }
