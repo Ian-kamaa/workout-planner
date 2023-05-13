@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [workout, setWorkout] = useState('');
+
+  const handleInputChange = (event) => {
+    setWorkout(event.target.value);
+  };
+
+  const handleAddWorkout = () => {
+    // Perform any validation checks here before adding the workout
+    console.log(`Adding workout: ${workout}`);
+    setWorkout('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Workout Planner</h1>
+      <input
+        type="text"
+        value={workout}
+        onChange={handleInputChange}
+        placeholder="Enter your workout"
+      />
+      <button onClick={handleAddWorkout}>Add Workout</button>
     </div>
   );
 }
